@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="collective.geo.cesium">
+
+  <genericsetup:registerProfile
+      name="default"
+      title="Collective Geo Cesium"
+      directory="profiles/default"
+      description='Extension profile for Collective Geo Cesium.'
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+</configure>
