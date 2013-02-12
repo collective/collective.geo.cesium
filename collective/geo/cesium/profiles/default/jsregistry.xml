@@ -3,6 +3,6 @@
    autogroup="False">
  <!-- cesium production -->
  <javascript cacheable="True" compression="none" cookable="True"
-    enabled="True" expression="" id="++resource++collective.geo.cesium.js" inline="False"/>
+    enabled="True" expression="" id="++resource++collective.geo.cesium/Cesium.js" inline="False"/>
 
 </object>

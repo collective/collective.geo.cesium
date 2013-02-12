@@ -4,9 +4,26 @@
     xmlns:browser="http://namespaces.zope.org/browser" >
 
 
-  <browser:resource
+  <!--browser:resource
       name="collective.geo.cesium.js"
       file="static/Cesium.js"
-      layer="..interfaces.IGeoCesiumLayer" />
+      layer="..interfaces.IGeoCesiumLayer" /-->
+      
+ <browser:resourceDirectory
+	name="collective.geo.cesium"
+	directory="static"
+    layer="..interfaces.IGeoCesiumLayer" />
+	
+ 
+ 
+  <browser:page
+    for="*"
+	name="test_cesium.html"
+	class=".views.CesiumTestView"
+	template="cesium_test.pt"
+	layer="..interfaces.IGeoCesiumLayer"
+    allowed_interface=".views.ICesiumTestView"
+	permission="zope2.View"
+  />
 
 </configure>
