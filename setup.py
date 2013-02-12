@@ -24,7 +24,7 @@ setup(name='collective.geo.cesium',
       keywords='GIS Cesium Globe WebGL',
       author='Christian Ledermann',
       author_email='christian.ledermann@gmail.com',
-      url='http://plone.org/products/collective.',
+      url='http://plone.org/products/collective.geo.cesium',
       license='GPL',
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['collective', 'collective.geo'],
@@ -33,6 +33,7 @@ setup(name='collective.geo.cesium',
       install_requires=[
           'setuptools',
           # -*- Extra requirements: -*-
+          'collective.geo.settings',
       ],
       entry_points="""
       # -*- Entry points: -*-

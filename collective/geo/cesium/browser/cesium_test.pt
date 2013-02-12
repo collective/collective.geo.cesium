@@ -18,7 +18,7 @@
               <li><input type="radio" name="baselayers" value="1" id="bingair"/><label for="bingair">Bing Satellite</label></li>
               <li><input type="radio" name="baselayers" value="2" id="bingmap"/><label for="bingmap">Bing Map</label></li>
               <li><input type="radio" name="baselayers" value="3" id="binghybrid"/><label for="binghybrid">Bing Hybrid</label></li>
-              <li><input type="radio" name="baselayers" value="0" id="osm"/><label for="osm">Open Street Map</label></li>
+              <li><input type="radio" name="baselayers" value="0" id="osm" checked="checked"/><label for="osm">Open Street Map</label></li>
           </ul>
         </div>
         <!--div id="toolbar"></div-->
