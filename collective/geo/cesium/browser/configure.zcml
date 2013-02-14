@@ -40,7 +40,7 @@
     name="cesium_imagery_proxy"
     class=".views.ImageProxy"
     layer="..interfaces.IGeoCesiumLayer"
-    permission="zope2.View"
+    permission="zope.Public"
   />
 
 
