@@ -62,6 +62,7 @@ var %(name)s = new Cesium.WebMapServiceImageryProvider({
     proxy: new Cesium.DefaultProxy('%(proxy)s')
 });
 centralBody.getImageryLayers().addImageryProvider(%(name)s);
+//%(name)s.alpha = %(transparancy).1f;
 """},
 'wms_overlay':
     {'title': 'WMS', 'js': """
@@ -73,10 +74,49 @@ var %(name)s = new Cesium.WebMapServiceImageryProvider({
         Cesium.Math.toRadians(%(south)f),
         Cesium.Math.toRadians(%(east)f),
         Cesium.Math.toRadians(%(north)f)),
+    parameters:{
+        transparent: 'true',
+        format: 'image/%(format)s'
+    },
+    proxy: new Cesium.DefaultProxy('%(proxy)s')
+});
+%(name)s.alpha = %(transparancy).1f;
+centralBody.getImageryLayers().addImageryProvider(%(name)s);
+"""},
+
+'tms_base':
+    {'title': 'TMS', 'js': """
+var %(name)s = new Cesium.TileMapServiceImageryProvider({
+    url: '%(url)s',
+    fileExtension : %(format)s,
+    extent : new Cesium.Extent(
+        Cesium.Math.toRadians(%(west)f),
+        Cesium.Math.toRadians(%(south)f),
+        Cesium.Math.toRadians(%(east)f),
+        Cesium.Math.toRadians(%(north)f)),
     proxy: new Cesium.DefaultProxy('%(proxy)s')
 });
 centralBody.getImageryLayers().addImageryProvider(%(name)s);
+//%(name)s.alpha = %(transparancy).1f;
 """},
+'tms_overlay':
+    {'title': 'TMS', 'js': """
+var %(name)s = new Cesium.TileMapServiceImageryProvider({
+    url: '%(url)s',
+    fileExtension : %(format)s,
+    extent : new Cesium.Extent(
+        Cesium.Math.toRadians(%(west)f),
+        Cesium.Math.toRadians(%(south)f),
+        Cesium.Math.toRadians(%(east)f),
+        Cesium.Math.toRadians(%(north)f)),
+    proxy: new Cesium.DefaultProxy('%(proxy)s')
+});
+centralBody.getImageryLayers().addImageryProvider(%(name)s);
+%(name)s.alpha = %(transparancy).1f;
+"""},
+
+
+
 }
 
 
@@ -133,6 +173,8 @@ class CesiumWMSView(CesiumTestView):
         params = {'name': 'wms_baselayer',
             'url': self.context.server.to_object.remote_url,
             'west':-180, 'south':-90, 'east':180, 'north':90,
+            'transparancy': self.context.opacity,
+            'format': self.context.img_format,
             'proxy': self.context.server.to_object.absolute_url() +'/@@cesium_imagery_proxy'}
         if self.context.baselayer:
             if self.context.singlelayers:
@@ -158,6 +200,8 @@ class CesiumWMSView(CesiumTestView):
         params = {'name': 'wms_layer',
             'url': self.context.server.to_object.remote_url,
             'west':-180, 'south':-90, 'east':180, 'north':90,
+            'transparancy': self.context.opacity,
+            'format': self.context.img_format,
             'proxy': self.context.server.to_object.absolute_url() +'/@@cesium_imagery_proxy'}
         if self.context.baselayer:
             if self.context.singlelayers:
