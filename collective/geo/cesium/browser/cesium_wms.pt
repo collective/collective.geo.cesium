@@ -28,9 +28,9 @@
           <ul tal:define="layers view/get_maplayers">
               <li tal:repeat="layer layers">
                  <input type="checkbox" name="maplayers" value="1" id="bingair" checked="checked"
-                    tal:attributes="value repeat/layer/index; id string:baselayer-${repeat/layer/number}"/>
+                    tal:attributes="value repeat/layer/index; id string:maplayer-${repeat/layer/number}"/>
                  <label for="bingair"
-                    tal:attributes="for string:baselayer-${repeat/layer/number}"
+                    tal:attributes="for string:maplayer-${repeat/layer/number}"
                     tal:content="layer/title">Bing Satellite</label>
               </li>
           </ul>

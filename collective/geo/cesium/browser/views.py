@@ -220,11 +220,6 @@ class CesiumWMSView(CesiumTestView):
                 return []
         else:
             if self.context.singlelayers:
-                params['layer'] = json.dumps(self.context.layers)
-                title = self.context.Title()
-                layers.append({'js':layer_map['wms_overlay']['js'] % params,
-                                'title': title})
-            else:
                 wms = self.context.server.to_object.get_service()
                 for layer in self.context.layers:
                     params['layer'] = "'" +  + "'"
@@ -234,6 +229,11 @@ class CesiumWMSView(CesiumTestView):
                     params['east']=wms.contents[layer].boundingBoxWGS84[2]
                     params['north']=wms.contents[layer].boundingBoxWGS84[3]
                     layers.append({'js':layer_map['wms_overlay']['js'] % params,
+                                'title': title})
+            else:
+                params['layer'] = json.dumps(self.context.layers)
+                title = self.context.Title()
+                layers.append({'js':layer_map['wms_overlay']['js'] % params,
                                 'title': title})
         return layers
 
