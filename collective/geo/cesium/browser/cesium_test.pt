@@ -3,9 +3,10 @@
       metal:use-macro="here/main_template/macros/master"
       i18n:domain="collective.geo.file">
 <head>
-    <metal:javascript_head fill-slot="javascript_head_slot">
-      <metal:use use-macro="context/@@collectivegeo-macros/openlayers" />
-    </metal:javascript_head>
+     <metal:javascript_head fill-slot="javascript_head_slot">
+        <script type="text/javascript" src="Cesium.js"
+            tal:attributes="src string:${portal_url}/++resource++collective.geo.cesium/Cesium.js"> </script>
+     </metal:javascript_head>
 </head>
 <body>
   <metal:content-core fill-slot="content-core">
