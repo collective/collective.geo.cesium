@@ -18,6 +18,10 @@
           <ul tal:define="layers view/get_baselayers">
               <li tal:repeat="layer layers">
                  <input type="radio" name="baselayers" value="1" id="bingair"
+                    tal:condition="not: repeat/layer/start"
+                    tal:attributes="value repeat/layer/index; id string:baselayer-${repeat/layer/number}"/>
+                 <input type="radio" name="baselayers" value="1" id="bingair"
+                    tal:condition="repeat/layer/start" checked="checked"
                     tal:attributes="value repeat/layer/index; id string:baselayer-${repeat/layer/number}"/>
                  <label for="bingair"
                     tal:attributes="for string:baselayer-${repeat/layer/number}"
