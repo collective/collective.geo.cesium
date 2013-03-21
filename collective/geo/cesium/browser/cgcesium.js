@@ -13,8 +13,16 @@ $(window).bind("load", function(){
     }).appendTo('#cesiumContainer');
 
     var canvas = $('#glCanvas')[0];
-    var scene = new Cesium.Scene(canvas);
-    var primitives = scene.getPrimitives();
+    try {
+        var scene = new Cesium.Scene(canvas);
+        var primitives = scene.getPrimitives();
+    } catch(e) {
+
+        // display an error message
+        $("#loadingOverlay h1").text('Error initializing WebGL');
+        $('#cesiumContainer').hide();
+        return false
+    };
 
     scene.skyAtmosphere = new Cesium.SkyAtmosphere();
     var ellipsoid = Cesium.Ellipsoid.WGS84;
