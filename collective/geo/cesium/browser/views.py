@@ -245,6 +245,44 @@ class CesiumWMSView(CesiumTestView):
         return self.js_template() % {'baselayerjs': ''.join([l['js'] for l in baselayers]),
                                     'maplayerjs': ''.join([l['js'] for l in maplayers])}
 
+class ICesiumCZMLView(Interface):
+    """ """
+
+class CesiumCZMLView(CesiumTestView):
+    implements(ICesiumCZMLView)
+
+
+    def get_maplayers(self):
+        layers = []
+        js = """
+        //Create a DynamicObjectCollection for handling the CZML
+        var dynamicObjectCollection = new DynamicObjectCollection();
+        //Create the standard CZML visualizer collection
+        var visualizers = VisualizerCollection.createCzmlStandardCollection(scene, dynamicObjectCollection);
+        var url = '%(url)s/@@czml.json';
+        //Download and parse a CZML file
+        jQuery.get(url,
+                function(data) {
+                    var czml = JSON.parse(data);
+                    //Process the CZML, which populates the collection with DynamicObjects
+                    dynamicObjectCollection.processCzml(czml);
+            });
+        //Figure out the time span of the data
+        /*var availability = dynamicObjectCollection.computeAvailability();*/
+        //Create a Clock object to drive time.
+        /*var clock = new Clock(availability.start, availability.stop);*/
+        """ % self.context.absolute_url()
+        layers.append({'js':js,
+                       'title': self.context.Title()})
+        return layers
+
+    def get_js(self):
+        baselayers = self.get_baselayers()
+        maplayers = self.get_maplayers()
+        return self.js_template() % {'baselayerjs': ''.join([l['js'] for l in baselayers]),
+                                    'maplayerjs': ''.join([l['js'] for l in maplayers])}
+
+
 class ImageProxy(BrowserView):
     ALLOWED_CONTENT_TYPES = (
     "image/png",

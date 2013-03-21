@@ -6,7 +6,7 @@
     i18n_domain="collective.geo.cesium">
 
 
- <browser:resourceDirectory
+  <browser:resourceDirectory
     name="collective.geo.cesium"
     directory="static"
     layer="..interfaces.IGeoCesiumLayer" />
@@ -21,9 +21,9 @@
     layer="..interfaces.IGeoCesiumLayer"
     allowed_interface=".views.ICesiumTestView"
     permission="zope2.View"
-  />
+    />
 
-<browser:page
+  <browser:page
     zcml:condition="installed collective.geo.wms"
     for="collective.geo.wms.wmslayer.IWMSLayer"
     name="cesiumwmsview.html"
@@ -32,17 +32,25 @@
     layer="..interfaces.IGeoCesiumLayer"
     allowed_interface=".views.ICesiumWMSView"
     permission="zope2.View"
-  />
+    />
 
-<browser:page
+  <browser:page
     zcml:condition="installed collective.geo.wms"
     for="collective.geo.wms.wmsserver.IWMSServer"
     name="cesium_imagery_proxy"
     class=".views.ImageProxy"
     layer="..interfaces.IGeoCesiumLayer"
     permission="zope.Public"
-  />
+    />
 
-
+  <browser:page
+    for="Products.CMFCore.interfaces.IFolderish"
+    name="cesiumczmlview.html"
+    class=".views.CesiumCZMLView"
+    template="cesium_wms.pt"
+    layer="..interfaces.IGeoCesiumLayer"
+    allowed_interface=".views.ICesiumCZMLView"
+    permission="zope2.View"
+    />
 
 </configure>
