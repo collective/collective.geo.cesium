@@ -256,22 +256,22 @@ class CesiumCZMLView(CesiumTestView):
         layers = []
         js = """
         //Create a DynamicObjectCollection for handling the CZML
-        var dynamicObjectCollection = new DynamicObjectCollection();
+        var dynamicObjectCollection = new Cesium.DynamicObjectCollection();
         //Create the standard CZML visualizer collection
-        var visualizers = VisualizerCollection.createCzmlStandardCollection(scene, dynamicObjectCollection);
+        var visualizers = Cesium.VisualizerCollection.createCzmlStandardCollection(scene, dynamicObjectCollection);
         var url = '%(url)s/@@czml.json';
         //Download and parse a CZML file
-        jQuery.get(url,
-                function(data) {
-                    var czml = JSON.parse(data);
-                    //Process the CZML, which populates the collection with DynamicObjects
-                    dynamicObjectCollection.processCzml(czml);
-            });
+        Cesium.loadJson(url).then(function(czml) {
+            Cesium.processCzml(czml, dynamicObjectCollection, url);
+        });
         //Figure out the time span of the data
-        /*var availability = dynamicObjectCollection.computeAvailability();*/
+        // XXX needed? var availability = dynamicObjectCollection.computeAvailability();
         //Create a Clock object to drive time.
-        /*var clock = new Clock(availability.start, availability.stop);*/
-        """ % self.context.absolute_url()
+        /* do i need this ????
+        var clock = new Cesium.Clock(availability.start, availability.stop);
+        visualizers.update(clock.tick());
+        */
+        """ % {'url': self.context.absolute_url() }
         layers.append({'js':js,
                        'title': self.context.Title()})
         return layers
