@@ -264,6 +264,8 @@ class CesiumCZMLView(CesiumTestView):
         Cesium.loadJson(url).then(function(czml) {
             Cesium.processCzml(czml, dynamicObjectCollection, url);
         });
+
+
         //Figure out the time span of the data
         // XXX needed? var availability = dynamicObjectCollection.computeAvailability();
         //Create a Clock object to drive time.

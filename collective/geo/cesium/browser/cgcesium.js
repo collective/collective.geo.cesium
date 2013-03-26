@@ -46,14 +46,18 @@ $(window).bind("load", function(){
 
     function animate() {
         // INSERT CODE HERE to update primitives based on changes to animation time, camera parameters, etc.
-    }
+        // Construct a Julian date specifying the UTC time standard
+        var date = new Date();
+        var julianDate = Cesium.JulianDate.fromDate(date, Cesium.TimeStandard.UTC);
+        visualizers.update(julianDate);
+    };
 
     function tick() {
         scene.initializeFrame();
         animate();
         scene.render();
         Cesium.requestAnimationFrame(tick);
-    }
+    };
     tick();
     ///////////////////////////////////////////////////////////////////////////
     // Example resize handler
@@ -95,7 +99,7 @@ $(window).bind("load", function(){
         var is_visible = $(this).is(':checked');
         i = numBaseLayers + parseInt($(this).val());
         centralBody.getImageryLayers().get(i).show = is_visible;
-    }
+    };
 
     $("#maplayerchoser").find("input").each(function(i) {
         $(this).change(onMapLayerOptionChange);
