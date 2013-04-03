@@ -259,23 +259,15 @@ class CesiumCZMLView(CesiumTestView):
         var dynamicObjectCollection = new Cesium.DynamicObjectCollection();
         //Create the standard CZML visualizer collection
         var visualizers = Cesium.VisualizerCollection.createCzmlStandardCollection(scene, dynamicObjectCollection);
+        has_visualizers = true;
         var url = '%(url)s/@@czml.json';
         //Download and parse a CZML file
         Cesium.loadJson(url).then(function(czml) {
             Cesium.processCzml(czml, dynamicObjectCollection, url);
         });
-
-
-        //Figure out the time span of the data
-        // XXX needed? var availability = dynamicObjectCollection.computeAvailability();
-        //Create a Clock object to drive time.
-        /* do i need this ????
-        var clock = new Cesium.Clock(availability.start, availability.stop);
-        visualizers.update(clock.tick());
-        */
         """ % {'url': self.context.absolute_url() }
         layers.append({'js':js,
-                       'title': self.context.Title()})
+                       'title': None})
         return layers
 
     def get_js(self):

@@ -36,7 +36,7 @@ $(window).bind("load", function(){
             centralBody.getImageryLayers().get(i).show = false;
         };
     };
-
+    var has_visualizers = false;
     %(maplayerjs)s
     var transitioner = new Cesium.SceneTransitioner(scene, ellipsoid);
     // Prevent right-click from opening a context menu.
@@ -46,10 +46,12 @@ $(window).bind("load", function(){
 
     function animate() {
         // INSERT CODE HERE to update primitives based on changes to animation time, camera parameters, etc.
-        // Construct a Julian date specifying the UTC time standard
-        var date = new Date();
-        var julianDate = Cesium.JulianDate.fromDate(date, Cesium.TimeStandard.UTC);
-        visualizers.update(julianDate);
+        if (has_visualizers) {
+            // Construct a Julian date specifying the UTC time standard
+            var date = new Date();
+            var julianDate = Cesium.JulianDate.fromDate(date, Cesium.TimeStandard.UTC);
+            visualizers.update(julianDate);
+        };
     };
 
     function tick() {
