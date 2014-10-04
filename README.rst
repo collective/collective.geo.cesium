@@ -3,14 +3,13 @@ Introduction
 
 Collective Geo Cesium integrates the Cesium_ WebGl Globe with
 collective.geo_. It can integrate WMS/TMS layers with
-collective.geo.wms_ and display vectorlayers with ollective.geo.czml_
+collective.geo.wms_ and display vectorlayers with collective.geo.czml_
 
 For the impatient
 =================
 
-You can append /@@test_cesium.html to the url of your plone site
-to test a basic cesium widget with bing and openstreetmap layers.
-
+You can append ``/@@test_cesium.html`` to the url of your plone site
+to test a basic cesium widget with Bing and OpenStreetMap layers.
 
 Links
 =====
